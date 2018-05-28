@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="NewWebService" targetNamespace="http://services/" xmlns:tns="http://services/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsp1="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+ >
+    <message name="hello"/>
+    <message name="helloResponse"/>
+    <message name="convertInt"/>
+    <message name="convertIntResponse"/>
+    <message name="divide"/>
+    <message name="divideResponse"/>
+    <message name="CheckVerifyFault"/>
+    <portType name="NewWebService">
+        <operation name="hello">
+            <input message="tns:hello"/>
+            <output message="tns:helloResponse"/>
+        </operation>
+        <operation name="convertInt">
+            <input message="tns:convertInt"/>
+            <output message="tns:convertIntResponse"/>
+        </operation>
+        <operation name="divide">
+            <input message="tns:divide"/>
+            <output message="tns:divideResponse"/>
+            <fault name="CheckVerifyFault" message="tns:CheckVerifyFault"/>
+        </operation>
+    </portType>
+    <binding name="NewWebServicePortBinding" type="tns:NewWebService">
+        <wsp1:PolicyReference URI="#NewWebServicePortBindingPolicy"/>
+        <operation name="hello">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="convertInt">
+            <input/>
+            <output/>
+        </operation>
+        <operation name="divide">
+            <input/>
+            <output/>
+            <fault name="CheckVerifyFault"/>
+        </operation>
+    </binding>
+    <service name="NewWebService">
+        <port name="NewWebServicePort" binding="tns:NewWebServicePortBinding"/>
+    </service>
+    <wsp1:Policy wsu:Id="NewWebServicePortBindingPolicy">
+        <wsp1:ExactlyOne>
+            <wsp1:All/>
+        </wsp1:ExactlyOne>
+    </wsp1:Policy>
+</definitions>
